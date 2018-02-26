@@ -45,6 +45,18 @@ namespace EasyConnection
 
         }
 
+        public static int GetRowCount(string cs, string table)
+        {
+            SqlConnection con = new SqlConnection(cs);
+            SqlCommand com = new SqlCommand($"Select count(*) from {table};" , con);
+            con.Open();
+            SqlDataReader sqlReader = com.ExecuteReader();
+            sqlReader.Read();
+            int count = sqlReader.GetInt32(0);
+            con.Close();
+            return count;
+        }
+
         //public static string[] GetRow(string CS, string table , int primaryKey) 
         //{
           
