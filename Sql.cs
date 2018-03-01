@@ -9,18 +9,16 @@ namespace EasyConnection
 {
     public class Sql
     {
-        public static void SendQuery(string CS, string command)
+        public static void SendQuery(SqlConnection con, string command)
         {
-            SqlConnection con = new SqlConnection(CS);
             SqlCommand com = new SqlCommand(command, con);
             con.Open();
             com.ExecuteReader();
             con.Close();
         }
 
-        public static string[] GetRow(string CS, string table , string condition)
+        public static string[] GetRow(SqlConnection con, string table , string condition)
         {
-            SqlConnection con = new SqlConnection(CS);
             SqlCommand com = new SqlCommand(String.Format("select * from {0} where {1}",table,condition), con);
             con.Open();
             SqlDataReader sqlReader = com.ExecuteReader();
@@ -45,10 +43,9 @@ namespace EasyConnection
 
         }
 
-        public static int GetRowCount(string cs, string table)
+        public static int GetRowCount(SqlConnection con, string table)
         {
-            SqlConnection con = new SqlConnection(cs);
-            SqlCommand com = new SqlCommand($"Select count(*) from {table};" , con);
+            SqlCommand com = new SqlCommand(String.Format("Select count(*) from {0};",table) , con);
             con.Open();
             SqlDataReader sqlReader = com.ExecuteReader();
             sqlReader.Read();
@@ -57,10 +54,9 @@ namespace EasyConnection
             return count;
         }
 
-        //public static string[] GetRow(string CS, string table , int primaryKey) 
-        //{
-          
 
-        //}
+
+
+
     }
 }
