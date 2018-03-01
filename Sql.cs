@@ -17,9 +17,9 @@ namespace EasyConnection
             con.Close();
         }
 
-        public static string[] GetRow(SqlConnection con, string table , string condition)
+        public static string[] GetRow(SqlConnection con, string command)
         {
-            SqlCommand com = new SqlCommand(String.Format("select * from {0} where {1}",table,condition), con);
+            SqlCommand com = new SqlCommand(command);
             con.Open();
             SqlDataReader sqlReader = com.ExecuteReader();
             int count = sqlReader.FieldCount;
