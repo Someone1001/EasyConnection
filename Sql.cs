@@ -19,7 +19,7 @@ namespace EasyConnection
 
         public static string[] GetRow(SqlConnection con, string command)
         {
-            SqlCommand com = new SqlCommand(command);
+            SqlCommand com = new SqlCommand(command,con);
             con.Open();
             SqlDataReader sqlReader = com.ExecuteReader();
             int count = sqlReader.FieldCount;
@@ -45,7 +45,7 @@ namespace EasyConnection
 
         public static int GetRowCount(SqlConnection con, string table)
         {
-            SqlCommand com = new SqlCommand(String.Format("Select count(*) from {0};",table) , con);
+            SqlCommand com = new SqlCommand(String.Format("Select count(*) from {0};", table), con);
             con.Open();
             SqlDataReader sqlReader = com.ExecuteReader();
             sqlReader.Read();
